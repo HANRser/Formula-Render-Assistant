@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>公式渲染助手</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      width: 300px;
+      margin: 0;
+      padding: 14px 16px 16px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 13px;
+      line-height: 1.55;
+      color: #1c2130;
+      background: #fff;
+    }
+    h1 { font-size: 15px; margin: 0 0 2px; display: flex; align-items: center; gap: 6px; }
+    h1 .logo { font-size: 18px; color: #3556e0; }
+    .sub { color: #8a93a6; font-size: 12px; margin-bottom: 12px; }
+    .row { display: flex; gap: 8px; margin-bottom: 10px; }
+    button {
+      flex: 1;
+      appearance: none;
+      border: 1px solid rgba(0,0,0,.14);
+      background: #f6f7fa;
+      color: #2b3448;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 12.5px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    button.primary { background: #3556e0; border-color: #3556e0; color: #fff; }
+    button:active { transform: translateY(1px); }
+    .tips { background: #f4f6fb; border: 1px solid #e3e8f5; border-radius: 10px; padding: 10px 12px; font-size: 12.5px; }
+    .tips b { display: block; margin-bottom: 4px; }
+    .tips ol { margin: 0; padding-left: 18px; }
+    .tips li { margin: 3px 0; }
+    kbd {
+      background: #e8ebf3; border: 1px solid #d3d9e8; border-bottom-width: 2px;
+      border-radius: 4px; padding: 0 5px; font-size: 11px; font-family: Consolas, monospace;
+    }
+    .foot { margin-top: 10px; font-size: 11px; color: #9aa2b4; }
+    @media (prefers-color-scheme: dark) {
+      body { background: #232937; color: #e6eaf3; }
+      button { background: #2e3648; border-color: rgba(255,255,255,.14); color: #dfe4ef; }
+      .tips { background: #2a3040; border-color: #38425a; }
+      kbd { background: #38425a; border-color: #47506b; }
+      .sub, .foot { color: #8a93a6; }
+    }
+  </style>
+</head>
+<body>
+  <h1><span class="logo">∑</span>公式渲染助手</h1>
+  <div class="sub">选中网页里的 LaTeX / Markdown 公式，一键变可读公式</div>
+  <div class="row">
+    <button id="btn-render" class="primary" title="渲染当前页选中的公式">渲染当前选区</button>
+    <button id="btn-console" title="打开独立渲染台，可粘贴长文本">渲染台</button>
+  </div>
+  <div class="tips">
+    <b>用法</b>
+    <ol>
+      <li>用鼠标（或长按）选中网页上的公式代码</li>
+      <li>点弹出的 <b>∑ 渲染</b> 按钮</li>
+      <li>快捷键 <kbd>Alt</kbd>+<kbd>R</kbd> 也可以</li>
+    </ol>
+  </div>
+  <p id="status" role="status" aria-live="polite"></p>
+  <button id="btn-repair">连接 / 修复当前页</button>
+  <div class="foot">离线工作 · 数据不出设备 · v1.0.2</div>
+  <script src="popup.js"></script>
+</body>
+</html>

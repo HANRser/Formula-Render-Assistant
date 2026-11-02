@@ -1,0 +1,10 @@
+{
+  "name": "formula-render-assistant",
+  "version": "1.0.2",
+  "private": true,
+  "scripts": {
+    "build": "node tools/build.cjs",
+    "test": "node tools/test-core.cjs && node tools/verify.cjs",
+    "package": "npm run build && npm test && node tools/package.cjs"
+  }
+}

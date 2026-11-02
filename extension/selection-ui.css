@@ -1,0 +1,249 @@
+/* 公式渲染助手 - 选区弹窗与渲染卡片样式 */
+
+.fra-bubble, .fra-card, .fra-toast, .fra-inline-chip {
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", Roboto, sans-serif;
+  -webkit-text-size-adjust: 100%;
+  line-height: 1.5;
+  text-align: left;
+}
+
+/* ---------- 选中文字后的悬浮按钮 ---------- */
+.fra-bubble {
+  position: absolute;
+  z-index: 2147483600;
+  display: none;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 12px;
+  background: #1f2430;
+  color: #eef1f6;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+.fra-bubble.fra-show { display: flex; }
+.fra-bubble button {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  background: transparent;
+  color: #eef1f6;
+  font-size: 13px;
+  line-height: 1;
+  padding: 8px 10px;
+  margin: 0;
+  border-radius: 9px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: inherit;
+}
+.fra-bubble button:active { background: rgba(255, 255, 255, 0.14); }
+@media (hover: hover) {
+  .fra-bubble button:hover { background: rgba(255, 255, 255, 0.14); }
+}
+.fra-bubble .fra-bubble-icon { font-size: 15px; margin-right: 4px; }
+.fra-bubble .fra-bubble-close {
+  padding: 8px 7px;
+  font-size: 12px;
+  opacity: 0.65;
+}
+.fra-bubble-hint {
+  max-width: 46vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  opacity: 0.75;
+  padding: 0 4px 0 8px;
+  direction: rtl;
+}
+
+/* ---------- 渲染结果卡片 ---------- */
+.fra-card {
+  position: absolute;
+  z-index: 2147483601;
+  display: none;
+  width: min(680px, calc(100vw - 24px));
+  max-height: 70vh;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #1c2130;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28), 0 2px 8px rgba(0, 0, 0, 0.14);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+.fra-card.fra-show { display: block; }
+.fra-card-head {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  z-index: 2;
+}
+.fra-card-title { font-size: 13px; font-weight: 600; color: #3a4358; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fra-card-title .fra-card-count { font-weight: 400; opacity: 0.7; }
+.fra-card-btn {
+  appearance: none;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #f6f7fa;
+  color: #2b3448;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: inherit;
+}
+.fra-card-btn:active { transform: translateY(1px); }
+@media (hover: hover) {
+  .fra-card-btn:hover { background: #eceef4; }
+}
+.fra-card-btn.fra-primary { background: #3556e0; border-color: #3556e0; color: #fff; }
+@media (hover: hover) {
+  .fra-card-btn.fra-primary:hover { background: #2a46bd; }
+}
+.fra-card-body { padding: 12px 14px 14px; font-size: 15px; word-break: break-word; }
+.fra-card-body .fra-seg-text { white-space: pre-wrap; }
+.fra-card-body .katex-display { margin: 0.6em 0; overflow-x: auto; overflow-y: hidden; padding: 2px 0; }
+.fra-card-foot {
+  padding: 8px 12px 12px;
+  font-size: 11px;
+  color: #8a93a6;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+.fra-card-error {
+  margin-top: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #fdf0f0;
+  border: 1px solid #f3c8c8;
+  color: #b3372f;
+  font-size: 12px;
+  white-space: pre-wrap;
+}
+.fra-empty { color: #8a93a6; font-size: 13px; padding: 8px 2px; }
+
+/* ---------- 原位渲染 ---------- */
+.fra-inline-chip {
+  position: absolute;
+  z-index: 2147483599;
+  display: none;
+  gap: 4px;
+  align-items: center;
+  padding: 3px;
+  border-radius: 10px;
+  background: #10265c;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.fra-inline-chip.fra-show { display: flex; }
+.fra-inline-chip button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  padding: 6px 8px;
+  font-size: 12px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.fra-inline-chip button:active { background: rgba(255, 255, 255, 0.16); }
+@media (hover: hover) {
+  .fra-inline-chip button:hover { background: rgba(255, 255, 255, 0.16); }
+}
+
+span.fra-rendered {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 0 1px;
+}
+span.fra-rendered:hover { outline: 1px dashed rgba(53, 86, 224, 0.55); outline-offset: 1px; }
+span.fra-rendered .katex-display { margin: 0; }
+
+span.fra-rendered-group { display: inline; }
+
+/* 复制 LaTeX 时的隐藏暂存区 */
+.fra-copy-area {
+  position: fixed;
+  left: -9999px;
+  top: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- 浮动提示 ---------- */
+.fra-toast {
+  position: fixed;
+  z-index: 2147483640;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(28, 33, 48, 0.92);
+  color: #fff;
+  font-size: 13px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  pointer-events: none;
+  max-width: 80vw;
+  text-align: center;
+}
+.fra-toast.fra-show { opacity: 1; }
+
+/* ---------- 公式回退样式 ---------- */
+.fra-fallback {
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Courier New", monospace;
+  font-size: 0.88em;
+  background: rgba(120, 130, 160, 0.14);
+  border-radius: 4px;
+  padding: 0 4px;
+}
+.fra-fallback-display { display: block; padding: 6px 8px; white-space: pre-wrap; }
+
+/* ---------- 深色模式 ---------- */
+@media (prefers-color-scheme: dark) {
+  .fra-card {
+    background: #232937;
+    color: #e6eaf3;
+    border-color: rgba(255, 255, 255, 0.09);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  .fra-card-head {
+    background: rgba(35, 41, 55, 0.92);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+  .fra-card-title { color: #c3cbdc; }
+  .fra-card-btn {
+    background: #2e3648;
+    border-color: rgba(255, 255, 255, 0.14);
+    color: #dfe4ef;
+  }
+  @media (hover: hover) {
+    .fra-card-btn:hover { background: #38425a; }
+  }
+  .fra-card-foot { color: #7f8aa3; border-top-color: rgba(255, 255, 255, 0.07); }
+  .fra-card-error { background: rgba(180, 60, 50, 0.16); border-color: rgba(220, 110, 100, 0.4); color: #f0a49b; }
+  .fra-empty, .fra-fallback { color: inherit; }
+  .fra-empty { color: #7f8aa3; }
+  .fra-fallback { background: rgba(140, 150, 190, 0.18); }
+}

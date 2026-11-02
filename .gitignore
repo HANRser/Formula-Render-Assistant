@@ -1,0 +1,9 @@
+.test-browser-profile/
+.test-browser-profile-*/
+node_modules/
+.playwright-mcp/
+dist/
+*.log
+.env
+.env.*
+!.env.example
